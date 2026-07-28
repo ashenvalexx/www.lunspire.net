@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lunspire Mobile - Economical Wireless Built on Verizon 5G</title>
+
+<style>
+/* Reset & Custom Properties */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    color-scheme: dark;
+    --bg-color: #0b0c10;
+    --accent-pink: #ff4ca4;
+    --accent-purple: #8c52ff;
+    --accent-cyan: #00f0ff;
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.75);
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-border-hover: rgba(255, 76, 164, 0.4);
+    --nav-bg: rgba(11, 12, 16, 0.75);
+}
+
+html {
+    scroll-behavior: smooth;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Inter, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Focus States */
+a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent-pink);
+    outline-offset: 4px;
+}
+
+/* Keyframe Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        transform: scale(1) translate(0, 0);
+        opacity: 0.15;
+    }
+    50% {
+        transform: scale(1.15) translate(-2%, 2%);
+        opacity: 0.25;
+    }
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Ambient Background */
+.background {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    overflow: hidden;
+    background: var(--bg-color);
+}
+
+.bg-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    animation: pulseGlow 12s ease-in-out infinite alternate;
+}
+
+.bg-orb-1 {
+    top: -10%;
+    left: -10%;
+    width: 50vw;
+    height: 50vw;
+    background: var(--accent-pink);
+}
+
+.bg-orb-2 {
+    bottom: -10%;
+    right: -10%;
+    width: 50vw;
+    height: 50vw;
+    background: var(--accent-purple);
+    animation-delay: -6s;
+}
+
+/* Header & Navigation */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 8%;
+    background: var(--nav-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--glass-border);
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.logo-img {
+    height: 40px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+nav a {
+    position: relative;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    opacity: 0.8;
+    transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple));
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+nav a.active, nav a:hover {
+    opacity: 1;
+    color: #ffffff;
+}
+
+nav a.active::after, nav a:hover::after {
+    width: 100%;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 55vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 160px 1.5rem 40px;
+    position: relative;
+}
+
+.hero-content {
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.network-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.network-badge span {
+    color: var(--accent-pink);
+}
+
+.hero h1 {
+    font-size: clamp(2.5rem, 5vw + 1rem, 4.25rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.25rem;
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+.hero h1 span {
+    background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+    background-size: 200% 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 6s ease infinite;
+}
+
+.hero p {
+    font-size: clamp(1rem, 1.2vw + 0.5rem, 1.15rem);
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.9rem 2rem;
+    background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+    border-radius: 9999px;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    box-shadow: 0 10px 25px -5px rgba(255, 76, 164, 0.35);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px -5px rgba(255, 76, 164, 0.5);
+}
+
+.button-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.9rem 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 9999px;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.button-outline:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent-pink);
+}
+
+/* Pricing Interactive Calculator */
+.pricing-section {
+    width: min(1200px, 90%);
+    margin: 4rem auto;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-header h2 {
+    font-size: 2.25rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+.section-header p {
+    color: var(--text-secondary);
+}
+
+.plans-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.plan-card {
+    position: relative;
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+}
+
+.plan-card.featured {
+    border-color: var(--accent-pink);
+    box-shadow: 0 10px 30px -10px rgba(255, 76, 164, 0.3);
+}
+
+.plan-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--glass-border-hover);
+}
+
+.plan-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    padding: 0.25rem 0.75rem;
+    background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.plan-name {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.plan-price {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.25rem;
+}
+
+.plan-price span {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+.plan-features {
+    list-style: none;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+}
+
+.plan-features li {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.plan-features li::before {
+    content: '✓';
+    color: var(--accent-pink);
+    font-weight: bold;
+}
+
+/* Interactive Comparison Table */
+.comparison-section {
+    width: min(1200px, 90%);
+    margin: 6rem auto;
+}
+
+.comparison-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 2.5rem;
+    overflow-x: auto;
+}
+
+.comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    min-width: 600px;
+}
+
+.comp-table th, .comp-table td {
+    padding: 1.25rem;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.comp-table th {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.comp-table th.highlight, .comp-table td.highlight {
+    background: rgba(255, 76, 164, 0.08);
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.comp-table td {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* Coverage Interactive Widget */
+.coverage-box {
+    width: min(1200px, 90%);
+    margin: 0 auto 8rem;
+    background: linear-gradient(135deg, rgba(140, 82, 255, 0.1), rgba(255, 76, 164, 0.1));
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 3rem;
+    text-align: center;
+}
+
+.coverage-box h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.coverage-box p {
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin: 0 auto 2rem;
+}
+
+/* Footer */
+footer {
+    padding: 4rem 1.5rem;
+    text-align: center;
+    border-top: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    background: rgba(11, 12, 16, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+footer p + p {
+    margin-top: 0.5rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    nav ul {
+        gap: 1.25rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero {
+        padding-top: 160px;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="background" aria-hidden="true">
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+</div>
+
+<header>
+    <nav>
+        <a href="index.html" class="logo-link">
+            <img src="banner.png" alt="Lunspire Communications" class="logo-img">
+        </a>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="solutions.html">Solutions</a></li>
+            <li><a href="lunspire-mobile.html" class="active">Lunspire Mobile</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="hero-content">
+            <div class="network-badge">
+                <span>⚡ Powered by</span> Verizon's 5G Ultra Wideband Network
+            </div>
+            <h1>Premium Wireless.<br><span>Without the Big-Carrier Price Tag.</span></h1>
+            <p>
+                Lunspire Mobile gives you nationwide 5G coverage on America's most reliable network. No hidden fees, no strict contracts—just high-speed wireless tailored for individuals and businesses.
+            </p>
+            <div class="hero-actions">
+                <a href="#plans" class="button">View Economical Plans</a>
+                <a href="https://www.verizon.com/coverage-map/" target="_blank" rel="noopener noreferrer" class="button-outline">Check Coverage Map ↗</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="plans" class="pricing-section">
+        <div class="section-header">
+            <h2>Economical Wireless Plans</h2>
+            <p>Choose the plan that fits your data needs. Switch or cancel anytime.</p>
+        </div>
+
+        <div class="plans-grid">
+            <article class="plan-card">
+                <div class="plan-name">Connect Lite</div>
+                <div class="plan-price">$20 <span>/ line / mo</span></div>
+                <ul class="plan-features">
+                    <li>5 GB High-Speed 5G / 4G LTE</li>
+                    <li>Unlimited Talk & Text</li>
+                    <li>Mobile Hotspot Included</li>
+                    <li>Powered by Verizon 5G</li>
+                    <li>Zero hidden activation fees</li>
+                </ul>
+                <a href="contact.html" class="button-outline">Select Plan</a>
+            </article>
+
+            <article class="plan-card featured">
+                <div class="plan-badge">Most Popular</div>
+                <div class="plan-name">Unlimited Plus</div>
+                <div class="plan-price">$35 <span>/ line / mo</span></div>
+                <ul class="plan-features">
+                    <li>Unlimited 5G Ultra Wideband Data</li>
+                    <li>15 GB Premium Mobile Hotspot</li>
+                    <li>Unlimited Talk & Text to US/CA/MX</li>
+                    <li>Priority Network Access</li>
+                    <li>HD Video Streaming</li>
+                </ul>
+                <a href="contact.html" class="button">Select Plan</a>
+            </article>
+
+            <article class="plan-card">
+                <div class="plan-name">Enterprise Unlimited</div>
+                <div class="plan-price">$50 <span>/ line / mo</span></div>
+                <ul class="plan-features">
+                    <li>Uncapped Ultra-Fast 5G Data</li>
+                    <li>50 GB High-Speed Hotspot</li>
+                    <li>Multi-line Business Discount</li>
+                    <li>Dedicated Priority Support</li>
+                    <li>Co-managed Mobile Device Management</li>
+                </ul>
+                <a href="contact.html" class="button-outline">Select Plan</a>
+            </article>
+        </div>
+    </section>
+
+    <section class="comparison-section">
+        <div class="section-header">
+            <h2>How We Compare</h2>
+            <p>Get the same coverage as major carriers at a fraction of the cost.</p>
+        </div>
+
+        <div class="comparison-card">
+            <table class="comp-table">
+                <thead>
+                    <tr>
+                        <th>Features</th>
+                        <th class="highlight">Lunspire Mobile</th>
+                        <th>Verizon Direct</th>
+                        <th>AT&T</th>
+                        <th>T-Mobile</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Network Backbone</td>
+                        <td class="highlight">Verizon 5G LTE</td>
+                        <td>Verizon 5G LTE</td>
+                        <td>AT&T 5G</td>
+                        <td>T-Mobile 5G</td>
+                    </tr>
+                    <tr>
+                        <td>Starting Price / Line</td>
+                        <td class="highlight">$20 / mo</td>
+                        <td>$65+ / mo</td>
+                        <td>$65+ / mo</td>
+                        <td>$60+ / mo</td>
+                    </tr>
+                    <tr>
+                        <td>Hotspot Included</td>
+                        <td class="highlight">Yes (All Plans)</td>
+                        <td>Extra Charge</td>
+                        <td>Varies</td>
+                        <td>Varies</td>
+                    </tr>
+                    <tr>
+                        <td>Contract Requirement</td>
+                        <td class="highlight">None</td>
+                        <td>36 Months (Devices)</td>
+                        <td>36 Months</td>
+                        <td>24 Months</td>
+                    </tr>
+                    <tr>
+                        <td>Personalized Support</td>
+                        <td class="highlight">Dedicated Team</td>
+                        <td>Call Center</td>
+                        <td>Call Center</td>
+                        <td>Call Center</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="coverage-box">
+        <h2>Nationwide Coverage You Can Trust</h2>
+        <p>
+            Operating directly on Verizon's cellular infrastructure, Lunspire Mobile keeps you connected in cities, suburbs, and rural areas nationwide.
+        </p>
+        <a href="https://www.verizon.com/coverage-map/" target="_blank" rel="noopener noreferrer" class="button">
+            View Official Verizon Coverage Map ↗
+        </a>
+    </section>
+</main>
+
+<footer>
+    <p><strong>Lunspire Communications</strong></p>
+    <p>VoIP • Telecom • Networking • Managed & Co-Managed IT • Wireless Solutions</p>
+    <p>© 2026 Lunspire Communications. All Rights Reserved.</p>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Add interactive card elevation highlight
+    const cards = document.querySelectorAll('.plan-card');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.transition = 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+        });
+    });
+});
+</script>
+
+</body>
+</html>
