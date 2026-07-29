@@ -39,7 +39,7 @@ body {
 }
 
 /* Focus States */
-a:focus-visible, button:focus-visible {
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
     outline: 2px solid var(--accent-pink);
     outline-offset: 4px;
 }
@@ -173,7 +173,7 @@ nav a.active::after, nav a:hover::after {
 
 /* Hero Section */
 .hero {
-    min-height: 55vh;
+    min-height: 45vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -246,7 +246,7 @@ nav a.active::after, nav a:hover::after {
 .solutions-section {
     width: min(1200px, 90%);
     margin: 0 auto;
-    padding: 0 0 8rem;
+    padding: 0 0 4rem;
 }
 
 .solutions-grid {
@@ -327,6 +327,128 @@ nav a.active::after, nav a:hover::after {
     font-weight: bold;
 }
 
+/* Calculator Section */
+.calculator-section {
+    width: min(1200px, 90%);
+    margin: 4rem auto 6rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 3rem 2.5rem;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    animation: fadeInUp 0.8s ease both;
+}
+
+.calculator-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.calculator-header h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+.calculator-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+.calc-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.input-group label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.input-group select, .input-group input[type="number"] {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    color: #fff;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.input-group select:focus, .input-group input[type="number"]:focus {
+    border-color: var(--accent-pink);
+}
+
+.radio-group {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.25rem;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+.calc-summary {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--glass-border-hover);
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.calc-summary h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 0.75rem;
+}
+
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    margin-bottom: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.summary-line strong {
+    color: #fff;
+}
+
+.total-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--glass-border-hover);
+}
+
+.total-price {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--accent-pink);
+}
+
 /* CTA Section */
 .cta-box {
     text-align: center;
@@ -379,6 +501,12 @@ footer p + p {
 }
 
 /* Mobile Responsive */
+@media (max-width: 850px) {
+    .calculator-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 @media (max-width: 768px) {
     nav {
         flex-direction: column;
@@ -455,14 +583,15 @@ footer p + p {
 
             <article class="solution-card">
                 <span class="tag">Communication Tech</span>
-                <h3>Managed VoIP & Unified Telecom</h3>
+                <h3>Managed VoIP & Cloud PBX</h3>
                 <p>
-                    Replace unreliable landlines and jittery VoIP setups with enterprise-grade voice services configured for low latency, zero dropped calls, and remote access across all devices.
+                    Transparent, enterprise-grade cloud PBX powered by AWS. Standard local DIDs from $1.00/mo, Toll-Free (800, 877, 833) from $3.00/mo, with flexible metered blocks or $14.95/ext unlimited calling plans.
                 </p>
                 <ul>
-                    <li>SIP Trunking & hosted cloud PBX</li>
-                    <li>Auto-attendants & intelligent call routing</li>
-                    <li>Seamless mobile & desktop app integrations</li>
+                    <li>Dedicated AWS PBX Sizing (Micro to Enterprise)</li>
+                    <li>Standard Local DIDs ($1/mo) & E911 DIDs ($2.50/mo)</li>
+                    <li>Toll-Free DIDs (800/877/833) ($3.00/mo)</li>
+                    <li>Metered minute blocks or $14.95/ext Unlimited</li>
                 </ul>
             </article>
 
@@ -493,13 +622,117 @@ footer p + p {
             </article>
 
         </div>
+    </section>
 
+    <!-- CALCULATOR SECTION -->
+    <section class="calculator-section" id="calculator">
+        <div class="calculator-header">
+            <h2>Calculate Your PBX & Voice Costs</h2>
+            <p>Customize your AWS PBX host, phone numbers, and call packages for an instant price estimate.</p>
+        </div>
+
+        <div class="calculator-grid">
+            <div class="calc-inputs">
+                <!-- AWS Sizing -->
+                <div class="input-group">
+                    <label for="awsSize">AWS PBX Size & Host Capacity</label>
+                    <select id="awsSize">
+                        <option value="15">Micro / Starter (1-10 Users, t3.small) - $15.00/mo</option>
+                        <option value="30">Small Business (10-30 Users, t3.medium) - $30.00/mo</option>
+                        <option value="65">Mid-Market (30-100 Users, c5.large) - $65.00/mo</option>
+                        <option value="125">Enterprise (100+ Users, c5.xlarge) - $125.00/mo</option>
+                    </select>
+                </div>
+
+                <!-- Number Selection -->
+                <div class="input-group">
+                    <label for="localDids">Standard Local Numbers ($1.00/mo ea)</label>
+                    <input type="number" id="localDids" min="0" value="5">
+                </div>
+
+                <div class="input-group">
+                    <label for="e911Dids">Enhanced E911 DIDs ($2.50/mo ea)</label>
+                    <input type="number" id="e911Dids" min="0" value="0">
+                </div>
+
+                <div class="input-group">
+                    <label for="tollFreeDids">Toll-Free Numbers (800, 877, 833) ($3.00/mo ea)</label>
+                    <input type="number" id="tollFreeDids" min="0" value="1">
+                </div>
+
+                <!-- Calling Plan Model -->
+                <div class="input-group">
+                    <label>Calling Model Selection</label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="planType" value="metered" checked> Metered Packages
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="planType" value="unlimited"> Unlimited Extensions
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Plan Options: Metered -->
+                <div class="input-group" id="meteredOptions">
+                    <label for="outboundBlock">Domestic Minutes Package</label>
+                    <select id="outboundBlock">
+                        <option value="0">None</option>
+                        <option value="15">Starter Block - 1,000 mins ($15.00/mo)</option>
+                        <option value="35" selected>Growth Block - 2,500 mins ($35.00/mo)</option>
+                        <option value="65">Business Block - 5,000 mins ($65.00/mo)</option>
+                    </select>
+                </div>
+
+                <div class="input-group" id="tollFreeMinutesBlock">
+                    <label for="tfBlock">Toll-Free Minutes Package (800/877/833)</label>
+                    <select id="tfBlock">
+                        <option value="0" selected>Pay-as-you-go / None</option>
+                        <option value="25">Toll-Free Block - 1,000 mins ($25.00/mo)</option>
+                        <option value="55">Toll-Free Pro - 2,500 mins ($55.00/mo)</option>
+                    </select>
+                </div>
+
+                <!-- Plan Options: Unlimited -->
+                <div class="input-group" id="unlimitedOptions" style="display: none;">
+                    <label for="unlimitedCount">Number of Unlimited Extensions ($14.95/mo ea)</label>
+                    <input type="number" id="unlimitedCount" min="1" value="5">
+                </div>
+            </div>
+
+            <!-- Summary Output -->
+            <div class="calc-summary">
+                <div>
+                    <h3>Monthly Cost Breakdown</h3>
+                    <div class="summary-line">
+                        <span>AWS PBX Hosting:</span>
+                        <strong id="summaryAws">$15.00</strong>
+                    </div>
+                    <div class="summary-line">
+                        <span>Phone Numbers (DIDs):</span>
+                        <strong id="summaryDids">$8.00</strong>
+                    </div>
+                    <div class="summary-line">
+                        <span>Calling Plan / Minutes:</span>
+                        <strong id="summaryCalling">$35.00</strong>
+                    </div>
+                </div>
+
+                <div class="total-line">
+                    <span>Estimated Monthly:</span>
+                    <span class="total-price" id="totalPrice">$58.00</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="solutions-section">
         <div class="cta-box">
             <h3>Ready to Fix Your IT for Good?</h3>
             <p>Let’s inspect your current infrastructure and replace the Band-Aids with real engineering.</p>
             <a href="contact.html" class="button">Get a Network Inspection</a>
         </div>
-    </section>
+    </div>
 </main>
 
 <footer>
@@ -507,6 +740,94 @@ footer p + p {
     <p>VoIP • Telecom • Networking • Managed & Co-Managed IT • Wireless Solutions</p>
     <p>© 2026 Lunspire Communications. All Rights Reserved.</p>
 </footer>
+
+<script>
+    // Price Calculator Logic
+    const awsSelect = document.getElementById('awsSize');
+    const localDidsInput = document.getElementById('localDids');
+    const e911DidsInput = document.getElementById('e911Dids');
+    const tollFreeDidsInput = document.getElementById('tollFreeDids');
+    const planTypeRadios = document.getElementsByName('planType');
+    
+    const meteredOptions = document.getElementById('meteredOptions');
+    const tollFreeMinutesBlock = document.getElementById('tollFreeMinutesBlock');
+    const unlimitedOptions = document.getElementById('unlimitedOptions');
+    
+    const outboundBlockSelect = document.getElementById('outboundBlock');
+    const tfBlockSelect = document.getElementById('tfBlock');
+    const unlimitedCountInput = document.getElementById('unlimitedCount');
+
+    // Display Fields
+    const summaryAws = document.getElementById('summaryAws');
+    const summaryDids = document.getElementById('summaryDids');
+    const summaryCalling = document.getElementById('summaryCalling');
+    const totalPrice = document.getElementById('totalPrice');
+
+    function calculateTotal() {
+        // 1. AWS Cost
+        const awsCost = parseFloat(awsSelect.value);
+
+        // 2. DIDs Cost
+        const localDidsCost = (parseInt(localDidsInput.value) || 0) * 1.00;
+        const e911DidsCost = (parseInt(e911DidsInput.value) || 0) * 2.50;
+        const tfDidsCost = (parseInt(tollFreeDidsInput.value) || 0) * 3.00;
+        const didsCost = localDidsCost + e911DidsCost + tfDidsCost;
+
+        // 3. Calling Plans Cost
+        let selectedPlanType = 'metered';
+        for (const radio of planTypeRadios) {
+            if (radio.checked) {
+                selectedPlanType = radio.value;
+                break;
+            }
+        }
+
+        let callingCost = 0;
+
+        if (selectedPlanType === 'metered') {
+            meteredOptions.style.display = 'flex';
+            tollFreeMinutesBlock.style.display = 'flex';
+            unlimitedOptions.style.display = 'none';
+
+            const meteredDomestic = parseFloat(outboundBlockSelect.value);
+            const meteredTf = parseFloat(tfBlockSelect.value);
+            callingCost = meteredDomestic + meteredTf;
+        } else {
+            meteredOptions.style.display = 'none';
+            tollFreeMinutesBlock.style.display = 'flex'; // Toll-Free minutes can still be added to unlimited plans
+            unlimitedOptions.style.display = 'flex';
+
+            const unlimitedExts = parseInt(unlimitedCountInput.value) || 0;
+            const meteredTf = parseFloat(tfBlockSelect.value);
+            callingCost = (unlimitedExts * 14.95) + meteredTf;
+        }
+
+        // Total
+        const finalTotal = awsCost + didsCost + callingCost;
+
+        // Update DOM
+        summaryAws.textContent = `$${awsCost.toFixed(2)}`;
+        summaryDids.textContent = `$${didsCost.toFixed(2)}`;
+        summaryCalling.textContent = `$${callingCost.toFixed(2)}`;
+        totalPrice.textContent = `$${finalTotal.toFixed(2)}`;
+    }
+
+    // Attach Event Listeners
+    awsSelect.addEventListener('change', calculateTotal);
+    localDidsInput.addEventListener('input', calculateTotal);
+    e911DidsInput.addEventListener('input', calculateTotal);
+    tollFreeDidsInput.addEventListener('input', calculateTotal);
+    outboundBlockSelect.addEventListener('change', calculateTotal);
+    tfBlockSelect.addEventListener('change', calculateTotal);
+    unlimitedCountInput.addEventListener('input', calculateTotal);
+
+    planTypeRadios.forEach(radio => {
+        radio.addEventListener('change', calculateTotal);
+    });
+
+    // Run Initial Calculation
+    calculateTotal();
+</script>
 
 </body>
 </html>
