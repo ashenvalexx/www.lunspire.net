@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lunspire Mobile - Economical Wireless Built on Verizon 5G</title>
+<title>Lunspire Mobile - Launching January 2027</title>
 
 <style>
 /* Reset & Custom Properties */
@@ -232,6 +232,41 @@ nav a.active::after, nav a:hover::after {
     line-height: 1.7;
     margin-bottom: 2rem;
     animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+/* Countdown Styles */
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    margin: 2rem 0;
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+}
+
+.countdown-box {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 1rem 1.25rem;
+    border-radius: 14px;
+    min-width: 80px;
+    text-align: center;
+}
+
+.countdown-number {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 800;
+    color: var(--accent-pink);
+    line-height: 1;
+}
+
+.countdown-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
 }
 
 .hero-actions {
@@ -484,6 +519,15 @@ footer p + p {
     .hero {
         padding-top: 160px;
     }
+    
+    .countdown-container {
+        gap: 0.5rem;
+    }
+    
+    .countdown-box {
+        min-width: 65px;
+        padding: 0.75rem 0.5rem;
+    }
 }
 </style>
 </head>
@@ -513,23 +557,44 @@ footer p + p {
     <section class="hero">
         <div class="hero-content">
             <div class="network-badge">
-                <span>⚡ Powered by</span> Verizon's 5G Ultra Wideband Network
+                <span>⚡ Coming Soon</span> Launching January 2027
             </div>
-            <h1>Premium Wireless.<br><span>Without the Big-Carrier Price Tag.</span></h1>
+            <h1>Premium Wireless.<br><span>Launching January 2027!</span></h1>
             <p>
-                Lunspire Mobile gives you nationwide 5G coverage on America's most reliable network. No hidden fees, no strict contracts—just high-speed wireless tailored for individuals and businesses.
+                We’re currently working closely with our carrier partners to finalize agreements and bring you the best coverage possible. Stay tuned for updates!
             </p>
+
+            <!-- Dynamic Countdown Timer -->
+            <div class="countdown-container">
+                <div class="countdown-box">
+                    <div class="countdown-number" id="days">00</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-number" id="hours">00</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-number" id="minutes">00</div>
+                    <div class="countdown-label">Mins</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-number" id="seconds">00</div>
+                    <div class="countdown-label">Secs</div>
+                </div>
+            </div>
+
             <div class="hero-actions">
-                <a href="#plans" class="button">View Economical Plans</a>
-                <a href="https://www.verizon.com/coverage-map/" target="_blank" rel="noopener noreferrer" class="button-outline">Check Coverage Map ↗</a>
+                <a href="contact.html" class="button">Get Notified at Launch</a>
+                <a href="#plans" class="button-outline">Preview Planned Rates</a>
             </div>
         </div>
     </section>
 
     <section id="plans" class="pricing-section">
         <div class="section-header">
-            <h2>Economical Wireless Plans</h2>
-            <p>Choose the plan that fits your data needs. Switch or cancel anytime.</p>
+            <h2>Upcoming Wireless Plans</h2>
+            <p>A sneak peek at our planned high-value data options.</p>
         </div>
 
         <div class="plans-grid">
@@ -540,10 +605,10 @@ footer p + p {
                     <li>5 GB High-Speed 5G / 4G LTE</li>
                     <li>Unlimited Talk & Text</li>
                     <li>Mobile Hotspot Included</li>
-                    <li>Powered by Verizon 5G</li>
+                    <li>Powered by Major Carrier Networks</li>
                     <li>Zero hidden activation fees</li>
                 </ul>
-                <a href="contact.html" class="button-outline">Select Plan</a>
+                <a href="contact.html" class="button-outline">Inquire Early</a>
             </article>
 
             <article class="plan-card featured">
@@ -557,7 +622,7 @@ footer p + p {
                     <li>Priority Network Access</li>
                     <li>HD Video Streaming</li>
                 </ul>
-                <a href="contact.html" class="button">Select Plan</a>
+                <a href="contact.html" class="button">Inquire Early</a>
             </article>
 
             <article class="plan-card">
@@ -570,7 +635,7 @@ footer p + p {
                     <li>Dedicated Priority Support</li>
                     <li>Co-managed Mobile Device Management</li>
                 </ul>
-                <a href="contact.html" class="button-outline">Select Plan</a>
+                <a href="contact.html" class="button-outline">Inquire Early</a>
             </article>
         </div>
     </section>
@@ -595,7 +660,7 @@ footer p + p {
                 <tbody>
                     <tr>
                         <td>Network Backbone</td>
-                        <td class="highlight">Verizon 5G LTE</td>
+                        <td class="highlight">Major Carrier Networks</td>
                         <td>Verizon 5G LTE</td>
                         <td>AT&T 5G</td>
                         <td>T-Mobile 5G</td>
@@ -634,12 +699,12 @@ footer p + p {
     </section>
 
     <section class="coverage-box">
-        <h2>Nationwide Coverage You Can Trust</h2>
+        <2>Nationwide Coverage Underway</h2>
         <p>
-            Operating directly on Verizon's cellular infrastructure, Lunspire Mobile keeps you connected in cities, suburbs, and rural areas nationwide.
+            We are actively negotiating carrier agreements to bring you seamless nationwide cellular connectivity upon launch in 2027.
         </p>
-        <a href="https://www.verizon.com/coverage-map/" target="_blank" rel="noopener noreferrer" class="button">
-            View Official Verizon Coverage Map ↗
+        <a href="contact.html" class="button">
+            Contact Us for Updates ↗
         </a>
     </section>
 </main>
@@ -652,13 +717,41 @@ footer p + p {
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // Add interactive card elevation highlight
+    // Interactive card elevation highlight
     const cards = document.querySelectorAll('.plan-card');
     cards.forEach(card => {
         card.addEventListener('mouseenter', () => {
             card.style.transition = 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
         });
     });
+
+    // Countdown Timer logic for Jan 1, 2027
+    const targetDate = new Date('January 1, 2027 00:00:00').getTime();
+
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const difference = targetDate - now;
+
+        if (difference > 0) {
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        } else {
+            const container = document.querySelector('.countdown-container');
+            if (container) {
+                container.innerHTML = '<h3>We are now Live!</h3>';
+            }
+        }
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
 });
 </script>
 
